@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<form th:action="@{/addProduct}" th:object="${product}" method="post">
+		<input type="hidden" th:field="*{product_id}">
+		<input type="text" th:field="*{product_name}" name="product_name" placeholder="Product Name"
+			class="form.control mb-4 col-4">
+		<input type="text" th:field="*{product_type}" name="product_type" placeholder="Product Category"
+			class="form.control mb-4 col-4">
+		<input type="text" th:field="*{product_price}" name="product_price" placeholder="Product Price"
+			class="form.control mb-4 col-4">
+		<input type="number" th:field="*{product_quantity}" name="product_quantity" placeholder="Poduct Stock"
+			class="form.control mb-4 col-4">
+		<input type="text" th:field="*{product_description}" name="product_description"
+			placeholder="product Description" class="form.control mb-4 col-4">
+		<input type="text" th:field="*{product_img}" name="product_img" placeholder="Product Image"
+			class="form.control mb-4 col-4">
+		<button type="submit"> update</button>
+
+	</form>
+
+</body>
+
+</html>

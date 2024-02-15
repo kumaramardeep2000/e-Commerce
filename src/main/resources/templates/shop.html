@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html "en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div th:replace="@{/header}::header"></div>
+
+	<table class="table">
+		<tr>
+			<th>Image</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Stock</th>
+			<th>Category/Type</th>
+			<th>Description</th>
+			<th>Action</th>
+		</tr>
+		<tr th:each="item:${products}">
+			<td><img th:src="*{item.product_img}" style="width: 70px"></td>
+			<td th:text="*{item.product_id}"></td>
+			<td th:text="*{item.product_name}"></td>
+			<td th:text="*{item.product_price}"></td>
+			<td th:text="*{item.product_quantity}"></td>
+			<td th:text="*{item.product_type}"></td>
+			<td th:text="*{item.product_description}"></td>
+			<td>
+				<form th:action="@{/addToCart}" th:object="${cart}" method="post">
+					<input type="hidden" name="product_id" th:value="${item.product_id}">
+					<input type="submit" value="addToCart">
+				</form>
+			</td>
+			<!--<
+			<a href="">Buy Now</a>
+			</td>-->
+		</tr>
+
+	</table>
+
+</body>
+
+</html>

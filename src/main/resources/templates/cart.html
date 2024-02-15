@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div th:replace="@{/header}::header"></div>
+
+	<div>
+		<table class="table">
+			<tr>
+				<th>Image</th>	
+				<th>Id</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total Price</th>
+				<th>Action</th>
+			</tr>
+			<tr th:each="item:${cart}")>
+				<td><img th:src="*{item.product.product_img}" style="width: 70px"></td>
+				<td th:text="*{item.product.product_id}"></td>
+				<td th:text="*{item.product.product_name}"></td>
+				<td th:text="*{item.product.product_type}"></td>
+				<td th:text="*{item.product.product_price}"></td>
+				<!--<td>
+					<form th:action="@{/updateQuantity}" method="post">
+						<input type="text" name="cart_id" th:value="${item.cart_id}">-->
+						<td th:text="*{item.product_quantity}"></td>
+					<!--</form>
+				</td>-->
+				<td></td>
+				<td>
+					<form th:action="@{/deleteCart}" method="post">
+						<input type="text" name="product_id" th:value="${item.product.product_id}">
+						<input type="submit" value="remove">
+					</form>
+<!--					<a th:href="@{/deleteCart/{product_id} (product_id=*{/item.product.product_id})}">remove</a>-->
+			</td>
+			</tr>
+			
+		</table>
+	</div>
+</body>
+
+</html>
