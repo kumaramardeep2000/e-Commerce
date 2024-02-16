@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Checkout</title>
+</head>
+<body>
+	<div th:replace="@{/header}::header"></div>
+	<div>
+	<table class="table">
+		<tr>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>Total Price</th>
+		</tr>
+		<tr th:each="item:${cart}">
+			<td th:text="*{item.product.product_name}"></td>
+			<td th:text="*{item.product_quantity}"></td>
+			<td th:text="*{item.product.product_price * item.product_quantity}"></td>
+		</tr>
+		<tr>
+			<th>Grand total :: 	</th>
+			<td th:text="*{grandTotal}"></td>
+		</tr>
+		
+		
+	</table>
+	<div>
+		<form th:action="@{checkout}" method="post">
+			<input type="text" name="name" placeholder="Enter Your name" required><br>
+			<br>
+			<input type="email" name="email" placeholder="Enter Your Email"><br>
+			<br>
+			<textarea rows="5" name="Address" placeholder="Enter Your Full Address" required></textarea><br>
+			<br>
+			<input type="text" name="Mobile" placeholder="Enter Your Mobile Number" required pattern="[0-9]{10}" maxlength="10">
+		</form>
+	</div>
+	</div>
+</body>
+</html>

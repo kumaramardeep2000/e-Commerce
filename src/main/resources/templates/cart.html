@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Cart</title>
 </head>
 
 <body>
@@ -27,22 +27,26 @@
 				<td th:text="*{item.product.product_name}"></td>
 				<td th:text="*{item.product.product_type}"></td>
 				<td th:text="*{item.product.product_price}"></td>
-				<!--<td>
+				<td>
 					<form th:action="@{/updateQuantity}" method="post">
-						<input type="text" name="cart_id" th:value="${item.cart_id}">-->
-						<td th:text="*{item.product_quantity}"></td>
-					<!--</form>
-				</td>-->
-				<td></td>
+						<input type="hidden" name="cart_id" th:value="${item.cart_id}">
+						<button type="submit" name="quantityBtn" value="-">-</button>
+						<span th:text="*{item.product_quantity}"></span>
+						<button type="submit" name="quantityBtn" value="+">+</button>
+
+					</form>
+				</td>
+				<td th:text="*{item.product_quantity * item.product.product_price}"></td>
 				<td>
 					<form th:action="@{/deleteCart}" method="post">
-						<input type="text" name="product_id" th:value="${item.product.product_id}">
+						<input type="hidden" name="product_id" th:value="${item.product.product_id}">
 						<input type="submit" value="remove">
 					</form>
-<!--					<a th:href="@{/deleteCart/{product_id} (product_id=*{/item.product.product_id})}">remove</a>-->
 			</td>
 			</tr>
-			
+			<tr>
+				<th><a th:href="@{/checkout}">Proceed To Checkout>>>>></a></th>
+			</tr>
 		</table>
 	</div>
 </body>

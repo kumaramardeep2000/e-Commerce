@@ -39,4 +39,27 @@ public class CartServiceImpl implements CartService {
 		return cr.getById(cart_id);
 	}
 
+	@Override
+	public void incrementQuantity(Cart cart) {
+		cart.setProduct_quantity(cart.getProduct_quantity()+1);
+		cr.save(cart);
+		
+	}
+
+	@Override
+	public void decrementQuantity(Cart cart) {
+		cart.setProduct_quantity(cart.getProduct_quantity()-1);
+		cr.save(cart);		
+	}
+
+	@Override
+	public Double grandTotal(List<Cart> cart) {
+		Double grandTotal=0.0;
+		for(Cart item:cart) {
+			Double total =item.getProduct_quantity() * item.getProduct().getProduct_price();
+			grandTotal+=total;
+			}
+		return grandTotal;
+	}
+
 }

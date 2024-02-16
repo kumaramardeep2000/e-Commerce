@@ -26,6 +26,7 @@ public class Product {
 	private String product_description;
 	@Column(name="product_image")
 	private String product_img;
+	
 	public Integer getProduct_id() {
 		return product_id;
 	}

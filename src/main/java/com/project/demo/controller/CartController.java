@@ -21,35 +21,34 @@ import jakarta.transaction.Transactional;
 
 @Controller
 public class CartController {
-	
+
 	@Autowired
 	private CartService cs;
-	
+
 	@Autowired
 	private ProductService ps;
-	
+
 	@GetMapping("/cart")
 	public String cart(Model model, HttpSession session) {
 //session.getAttribute("loginData");"loginData is same name as where i set session means in loginController"
-		Login user= (Login) session.getAttribute("loginData");
-			if(user!=null) {
-				List<Cart> cartData = cs.getCartByUser(user);
-				model.addAttribute("cart", cartData);
-				for (Cart cart : cartData) {
-					System.out.println(cart);
-				}
-				return "cart";
-			}else {
-				return "redirect:/login";
-			}
-		
-		
+		Login user = (Login) session.getAttribute("loginData");
+		if (user != null) {
+			List<Cart> cartData = cs.getCartByUser(user);
+			model.addAttribute("cart", cartData);
+//				for (Cart cart : cartData) {
+//					System.out.println(cart);
+//				}
+			return "cart";
+		} else {
+			return "redirect:/login";
+		}
+
 	}
-	
+
 	@PostMapping("/addToCart")
-	public String addToCart(HttpSession session,@RequestParam("product_id") Integer product_id) {
-		Login user= (Login) session.getAttribute("loginData");
-		if(user!=null) {
+	public String addToCart(HttpSession session, @RequestParam("product_id") Integer product_id) {
+		Login user = (Login) session.getAttribute("loginData");
+		if (user != null) {
 			Product product = ps.searchProductById(product_id);
 			System.out.println(product);
 			Cart cart = new Cart();
@@ -57,36 +56,36 @@ public class CartController {
 			cart.setLogin(user);
 			cart.setProduct_quantity(1);
 			List<Cart> cartData = cs.getCartByUser(user);
-			if(!cartData.isEmpty()) {
-			for (Cart oldCart : cartData) {
-				
-				if(product_id==oldCart.getProduct().getProduct_id()) {
-					System.out.println("hello");
-					cart.setProduct_quantity(oldCart.getProduct_quantity()+1);
-					cart.setCart_id(oldCart.getCart_id());
-					
+			if (!cartData.isEmpty()) {
+				for (Cart oldCart : cartData) {
+
+					if (product_id == oldCart.getProduct().getProduct_id()) {
+						System.out.println("hello");
+						cart.setProduct_quantity(oldCart.getProduct_quantity() + 1);
+						cart.setCart_id(oldCart.getCart_id());
+
+					}
 				}
-			}
-				
+
 			}
 			cs.addToCart(cart);
 			return "redirect:/shop";
-		}else {
+		} else {
 			return "redirect:/login";
 		}
-		
+
 	}
-	
+
 	@Transactional
 	@PostMapping("/deleteCart")
 	public String deleteCart(HttpSession session, @RequestParam("product_id") Integer product_id) {
 		Login user = (Login) session.getAttribute("loginData");
-		Product product= ps.searchProductById(product_id);
+		Product product = ps.searchProductById(product_id);
 		cs.deleteCart(user, product);
-		
+
 		return "redirect:/cart";
 	}
-	
+
 //	@PostMapping("/deleteCart/{product_id}")
 //	public String deleteCart(HttpSession session, @PathVariable("product_id") Integer product_id) {
 //		Login user = (Login) session.getAttribute("loginData");
@@ -94,12 +93,19 @@ public class CartController {
 //		cs.deleteCart(user, product);
 //		return "redirect:/cart";
 //	}
-	
+
 	@PostMapping("/updateQuantity")
-	public String updateQuantity(@RequestParam("cart_id") Integer cart_id,HttpSession session) {
-		Login user = (Login) session.getAttribute("loginData");
+	public String updateQuantity(@RequestParam("cart_id") Integer cart_id,
+								 @RequestParam("quantityBtn") String quantityButton) {
 		Cart cart = cs.getCartById(cart_id);
+		if(quantityButton.equals("+")) {
+			cs.incrementQuantity(cart);
+		}
+		else if(quantityButton.equals("-")) {
+			cs.decrementQuantity(cart);
+		}
 		return "redirect:/cart";
+		
 		
 	}
 

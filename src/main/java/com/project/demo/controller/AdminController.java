@@ -17,15 +17,21 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String adminLogin(Model model, Admin admin) {
 		model.addAttribute("admin", new Admin());
-		return "admin";
+		return "admin/admin";
 	}
 	
 	@PostMapping("/admin")
 	public String loginAdmin( String email, String password, Model model) {
 		Admin user=as.getByEmail(email);
-		System.out.println(as.getByEmail(email));
-		
-		return "redirect:/admin";
+		if(user!=null && password.equals(user.getPassword()))
+			System.out.println("Login Successfull");
+		return "redirect:/adminDashboard";
+	}
+	
+	@GetMapping("/adminDashboard")
+	public String getDashboard()
+	{
+		return "admin/adminDashboard";
 	}
 
 }
