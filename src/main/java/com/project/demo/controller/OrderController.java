@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.demo.model.Cart;
 import com.project.demo.model.Login;
 import com.project.demo.model.Order;
+import com.project.demo.model.Product;
 import com.project.demo.service.CartService;
 import com.project.demo.service.OrderService;
+import com.project.demo.service.ProductService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,6 +27,9 @@ public class OrderController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping("/checkout")
 	public String checkout(HttpSession session, Model model) {
@@ -67,9 +72,37 @@ public class OrderController {
 			order.setOrder_user_email(email);
 			order.setOrder_user_phone(mobile);
 			order.setOrder_address(address);
-			os.palceOrder(order);
+			os.palceOrder(order);	
 		}
-				return null;
+		//clear cart after place order
+		for(Cart cart:cartData) {
+			cartService.clearCart(cart);
+		}
+		//update product Stock After Order Placed
+		for(Cart cart:cartData) {
+			Product product = cart.getProduct();
+			int order_quantity = cart.getProduct_quantity();
+			int updatedStock= product.getProduct_quantity() - order_quantity;
+			product.setProduct_quantity(updatedStock);
+			productService.saveProduct(product); 
+		}
+				return "redirect:/orderConfirmPage";
+		
+	}
+	
+	@GetMapping("/orderConfirmPage")
+	public String orderConfirmation() {
+		return "orderConfirmPage";
+	}
+	
+	@GetMapping("/userOrder")
+	public String orderByUser(Model model, HttpSession session) {
+		Login user= (Login) session.getAttribute("loginData");
+		if(user!=null) {
+			List<Order> orderByUser = os.orderByUser(user);
+			model.addAttribute("orderData", orderByUser);
+		}
+		return "userOrderDetails";
 		
 	}
 }

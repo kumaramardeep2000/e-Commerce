@@ -101,7 +101,7 @@ public class CartController {
 		if(quantityButton.equals("+")) {
 			cs.incrementQuantity(cart);
 		}
-		else if(quantityButton.equals("-")) {
+		else if(quantityButton.equals("-") && cart.getProduct_quantity()>1) {
 			cs.decrementQuantity(cart);
 		}
 		return "redirect:/cart";

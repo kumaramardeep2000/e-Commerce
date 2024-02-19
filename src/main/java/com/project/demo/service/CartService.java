@@ -14,4 +14,5 @@ public interface CartService {
 	void decrementQuantity(Cart cart);
 	Cart getCartById(Integer cart_id);
 	Double grandTotal(List<Cart> cart);
+	void clearCart(Cart cart);
 }

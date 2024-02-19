@@ -62,4 +62,10 @@ public class CartServiceImpl implements CartService {
 		return grandTotal;
 	}
 
+	@Override
+	public void clearCart(Cart cart) {
+		cr.delete(cart);
+		
+	}
+
 }

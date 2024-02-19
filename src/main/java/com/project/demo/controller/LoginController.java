@@ -52,5 +52,26 @@ public class LoginController {
 		ls.saveUser(login);
 		return "redirect:/login";
 	}
+	
+	@GetMapping("/userLogout")
+	public String userLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@GetMapping("/userDashboard")
+	public String dashboard(HttpSession session, Model model) {
+		Login user= (Login) session.getAttribute("loginData");
+		if(user!=null) {
+			ls.getByEmail(user.getEmail());
+			model.addAttribute("userdata", user);
+			return "/userDashboard";
+		}
+		else {
+			return "redirect:/login";
+		}
+		
+		
+	}
 
 }

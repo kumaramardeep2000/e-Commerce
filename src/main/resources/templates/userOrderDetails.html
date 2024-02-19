@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<div th:replace="@{/header}::header"></div>
+	<h1>My Orders</h1>
+	<div th:replace="@{/fragments/dashboardSidebar}::dashboardSidebar"></div>
+
+	<div>
+		<table>
+			<tr>
+				<td>ProductImage</td>
+				<td>OrderId</td>
+				<td>ProductName</td>
+				<td>ProductPrice</td>
+				<td>ProductQuantity</td>
+				<td>OrderDate</td>
+				<td>OrderStatus</td>
+				<td>Total Price</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

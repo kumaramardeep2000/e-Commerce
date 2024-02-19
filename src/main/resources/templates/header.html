@@ -7,7 +7,9 @@
 <body>
 	<div th:fragment="header">
 		<a th:href="@{/}">Home</a>
-		<a th:href="@{/login}">User Login</a>
+		<a th:href="@{/userDashboard}" th:if="${session.loginData!=null}" th:text="${session.loginData.name}"></a>
+		<a th:href="@{/login}" th:if="${session.loginData==null}">User Login</a>
+		<a th:href="@{/userLogout}" th:if="${session.loginData!=null}">Logout</a>	
 		<a th:href="@{/shop}">Shopping</a>
 		<a th:href="@{/cart}">cart</a>
 		<a th:href="@{/admin}">Admin Login</a>
