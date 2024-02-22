@@ -27,6 +27,12 @@ public class Login {
 	
 	@Column (name ="Mobile No." )
 	private String mobile;
+	
+	@Column(name="Login_img")
+	private String image;
+	
+	@Column(name="Login_address")
+	private String address;
 
 	public String getMobile() {
 		return mobile;
@@ -68,10 +74,26 @@ public class Login {
 		this.password = password;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	@Override
 	public String toString() {
 		return "Login [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", mobile="
-				+ mobile + "]";
+				+ mobile + ", image=" + image + ", address=" + address + "]";
 	}
 	
 

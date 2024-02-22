@@ -55,4 +55,11 @@ public class Productcontroller {
 		return "admin/updateProduct";
 
 	}
+	@GetMapping("/singleProduct/{product_id}")
+	public String singleProduct(@PathVariable("product_id") Integer product_id, Model model) {
+		Product productById = ps.searchProductById(product_id);
+		model.addAttribute("product", productById);
+		return "singleProduct";
+		
+	}
 }

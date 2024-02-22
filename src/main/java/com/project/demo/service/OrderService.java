@@ -8,6 +8,6 @@ import com.project.demo.model.Order;
 public interface OrderService {
 	void palceOrder(Order order);
 	List<Order> orderByUser(Login login);
-//	Order getOrderById(Integer order_id);
+	Order getOrderById(Integer order_id);
 	
 }

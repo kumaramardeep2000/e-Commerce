@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.demo.model.Login;
 import com.project.demo.service.LoginService;
@@ -64,12 +65,18 @@ public class LoginController {
 		Login user= (Login) session.getAttribute("loginData");
 		if(user!=null) {
 			ls.getByEmail(user.getEmail());
-			model.addAttribute("userdata", user);
+			model.addAttribute("userData", user);
 			return "/userDashboard";
 		}
 		else {
 			return "redirect:/login";
 		}
+	}
+	@PostMapping("/userUpdate")
+	public String userUpdate(@RequestParam("email") String email, Model model) {
+		Login user = ls.getByEmail(email);
+		model.addAttribute("userData", user);
+		return "userUpdate";
 		
 		
 	}

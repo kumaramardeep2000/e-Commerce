@@ -24,10 +24,10 @@ public class OrderServiceImpl implements OrderService {
 		
 		return or.findOrderByUser(login);
 	}
-//	@Override
-//	public Order getOrderById(Integer order_id) {
-//		// TODO Auto-generated method stub
-//		return or.getById(order_id);
-//	}
+	@Override
+	public Order getOrderById(Integer order_id) {
+		// TODO Auto-generated method stub
+		return or.getById(order_id);
+	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -104,5 +105,18 @@ public class OrderController {
 		}
 		return "userOrderDetails";
 		
+	}
+	
+	@GetMapping("/userOrder/{Order_id}")
+	public String singleOrder(@PathVariable("Order_id") Integer order_id,HttpSession session, Model model) {
+		Login user= (Login) session.getAttribute("loginData");
+		if(user!=null) {
+			Order orderById = os.getOrderById(order_id);
+			model.addAttribute("order", orderById);
+			return "singleOrder";
+			
+		}else {
+			return "redirect:/login";
+		}
 	}
 }

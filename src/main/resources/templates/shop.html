@@ -21,7 +21,11 @@
 			<th>Action</th>
 		</tr>
 		<tr th:each="item:${products}">
-			<td><img th:src="*{item.product_img}" style="width: 70px"></td>
+			<td>
+				<a th:href="@{/singleProduct/{product_id} (product_id=*{item.product_id})}">
+					<img th:src="*{item.product_img}" style="width: 70px">
+				</a>
+				</td>
 			<td th:text="*{item.product_id}"></td>
 			<td th:text="*{item.product_name}"></td>
 			<td th:text="*{item.product_price}"></td>

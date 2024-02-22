@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<form th:action="@{/register}" method="post">
+			<input type="hidden" name="id" th:field="*{userData.id}" >
+			<input type="text" name="name" th:field="*{userData.name}" placeholder="Enter Your Name"><br>
+			<input type="text" name="password" th:field="*{userData.password}" placeholder="Enter Your new Password"><br>
+			<input type="text" name="mobile" th:field="*{userData.mobile}" placeholder="Enter Your Mobile No."><br>
+			<input type="text" name="email" th:field="*{userData.email}" placeholder="Enter Your email"><br>
+            <textarea rows="5" name="userAddress" th:text="${userData.address}" placeholder="Enter address"></textarea><br>
+		    <textarea rows="5" name="userImage" th:text="${userData.image}" placeholder="Enter Image url"></textarea>
+		    <img th:src="${userData.image}" style="width:70px"><br>
+		    <button type="submit">Update</button>
+		</form>
+	</div>
+</body>
+</html>
