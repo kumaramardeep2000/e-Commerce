@@ -3,9 +3,35 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home Page</title>
+<link rel="stylesheet" th:href="@{/css/header.css}"/> 
+<link rel="stylesheet" th:href="@{/css/style.css}"/> 
+
 </head>
 <body>
-	<div th:fragment="header">
+	<header>
+	<div class="logo">
+		<h1>E-comm.</h1>
+	</div>
+	 <div class="navbar">
+		<ul>
+     		<li><a th:href="@{/}">Home</a></li> 
+			<li><a th:href="@{/shop}">Shop</a></li> 
+			<li th:if="${session.userLoginData!=null}">
+				<a th:href="@{/userDashboard}" th:text="${session.userLoginData.userName}"></a>
+			</li>
+			<li>
+				<a th:href="@{/login}" th:if="${session.userLoginData==null}">Login</a>
+				<a th:href="@{/userLogout}" th:if="${session.userLoginData!=null}">Logout</a>
+			</li>
+			<li><a th:href="@{/cart}">Cart</a></li> 
+		</ul>
+	 </div>
+</header>
+	
+	
+
+	
+	<!--<div th:fragment="header">
 		<a th:href="@{/}">Home</a>
 		<a th:href="@{/userDashboard}" th:if="${session.loginData!=null}" th:text="${session.loginData.name}"></a>
 		<a th:href="@{/login}" th:if="${session.loginData==null}">User Login</a>
@@ -13,7 +39,7 @@
 		<a th:href="@{/shop}">Shopping</a>
 		<a th:href="@{/cart}">cart</a>
 		<a th:href="@{/admin}">Admin Login</a>
-	</div>
+	</div>-->
 
 </body>
 </html>
