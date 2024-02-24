@@ -4,11 +4,83 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Shopping</title>
+	
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}"/>
+<link rel="stylesheet" th:href="@{/css/product.css}"/>
+
 </head>
 
 <body>
 	<div th:replace="@{/header}::header"></div>
+	<div class="product-container">
+		<div class="products-filter">
+		<h2>Filter</h2>
+			<ul>
+				<li><a href="#">Shirt</a></li>
+				<li><a href="#">Pant</a></li>
+				<li><a href="#">Apple</a></li>
+				<li><a href="#">Mango</a></li>
+				<li><a href="#">Earphone</a></li>
+				<li><a href="#">Keyboard</a></li>
+				<li><a href="#">laptop</a></li>
+				<li><a href="#">Shirt</a></li>
+				<li><a href="#">Pant</a></li>
+				<li><a href="#">Apple</a></li>
+				<li><a href="#">Mango</a></li>
+				<li><a href="#">Earphone</a></li>
 
+			</ul>
+	</div>
+	
+	<div class="product-data">
+		<div class="product" th:each="item:${products}">
+			<div class="product-image">
+			<a th:href="@{/singleProduct/{product_id} (product_id=*{item.product_id})}">
+					<img th:src="*{item.product_img}">
+				</a>
+		</div>
+		<div class="product-info">
+			<p class="product-name">
+			<a th:href="@{/singleProduct/{product_id} (product_id=*{item.product_id})}"
+				  th:text="*{item.product_name}">
+					
+				</a>
+			</p>	
+			<p th:text="*{item.product_price}"></p>
+			<p th:text="*{item.product_type}" class="product-category"></p>
+			
+		<div class=".action-btn">
+			<form th:action="@{/addToCart}" th:object="${cart}" method="post">
+					<input type="hidden" name="product_id" th:value="${item.product_id}">
+					<input type="submit" value="addToCart">
+				</form>
+				</div>
+	</div>
+	</div>
+	</div>
+	
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+<!--		
 	<table class="table">
 		<tr>
 			<th>Image</th>
@@ -27,7 +99,12 @@
 				</a>
 				</td>
 			<td th:text="*{item.product_id}"></td>
-			<td th:text="*{item.product_name}"></td>
+			<td>
+				<a th:href="@{/singleProduct/{product_id} (product_id=*{item.product_id})}"
+				  th:text="*{item.product_name}">
+					
+				</a>
+			</td>
 			<td th:text="*{item.product_price}"></td>
 			<td th:text="*{item.product_quantity}"></td>
 			<td th:text="*{item.product_type}"></td>
@@ -38,13 +115,13 @@
 					<input type="submit" value="addToCart">
 				</form>
 			</td>
-			<!--<
+			<
 			<a href="">Buy Now</a>
-			</td>-->
+			</td>
 		</tr>
 
 	</table>
-
+-->
 </body>
 
 </html>

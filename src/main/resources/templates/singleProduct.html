@@ -2,9 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Single Product</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{/css/header.css}"/>
+<link rel="stylesheet" th:href="@{/css/singleProduct.css}"
 </head>
 <body>
-	<p th:text="${product}"></p>
+	<div th:replace="@{/header}::header"></div>
+	
+	<div class="single-container">
+		<div class="single-product">
+			<div class="single-image">
+				<img th:src="${product.product_img}">
+			</div>
+			<div class="single-data">
+				<p style="color:var( --txt-light-color)">Home/ Shop</p>
+				<p th:text="${product.product_type}"></p>
+				<h2 th:text="${product.product_name}"></h2>
+				<p th:text="'₹    '+${product.product_price}"></p>
+				<p th:text="${product.product_description}"></p>
+				<form th:action="@{/addToCart}" th:object="${cart}" method="post">
+					<input type="hidden" name="product_id" th:value="${product.product_id}">
+					<input type="submit" value="addToCart" class="btn">
+					
+				</form>
+				<a href="" class="btn"> Buy now</a>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!--	<p th:text="${product}"></p>-->
 </body>
 </html>
