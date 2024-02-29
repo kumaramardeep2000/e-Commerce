@@ -48,8 +48,8 @@ public class LoginController {
 	
 	@PostMapping("/register")
 	public String registration(Model model, Login login) {
+		System.out.println(login);
 		model.addAttribute("loginData", login);
-//		System.out.println(ls.saveUser(login));
 		ls.saveUser(login);
 		return "redirect:/login";
 	}

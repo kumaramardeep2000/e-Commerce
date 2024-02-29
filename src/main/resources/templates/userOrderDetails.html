@@ -3,12 +3,75 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<title>My Orders</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/userDashboard.css}" />
 </head>
 
 <body>
-	<div th:replace="@{/header}::header"></div>
-	<h1>My Orders</h1>
+    <div th:replace="@{/header}::header"></div>
+	<div class="dashboard">
+	<div th:replace="@{/admin/fragments/dashboardSidebar}::dashboardSidebar"></div>
+	<div class="right-content"></div>
+	
+	<hr> 
+	<div class="content">
+		<table cellspacing=0>
+			<tr>
+				<th>ProductImage</th>
+				<th>OrderId</th>
+				<th>ProductName</th>
+				<th>ProductPrice</th>
+				<th>ProductQuantity</th>
+				<th>OrderDate</th>
+				<th>order_status</th>
+				<th>Total Price</th>
+			</tr>
+			<tr th:each="item:${orderData}">
+				<td>
+					<a th:href="@{/userOrder/{Order_id} (Order_id=*{item.Order_id})}">
+						<img th:src="*{item.product_img}" style="width: 70px;">
+					</a>
+				</td>
+				<td th:text="*{item.order_id}"></td>
+				<td>
+					<a th:href="@{/userOrder/{Order_id} (Order_id=*{item.Order_id})}"
+						th:text="*{item.product_name}"></a>
+				</td>
+				<td th:text="*{item.product_price}"></td>
+				<td th:text="*{item.product_quantity}"></td>
+				<td th:text="*{item.order_date}"></td>
+				<td>
+							<p th:if="*{item.order_status}==pending" class="pending" th:text="${item.order_status}"></p>
+							<p th:if="*{item.order_status}==accepted" class="accepted" th:text="${item.order_status}"></p>
+							<p th:if="*{item.order_status}==rejected" class="rejected" th:text="${item.order_status}"></p>
+							<p th:if="*{item.order_status}==cancelled" class="cancelled" th:text="${item.order_status}"></p>
+						</td>
+						<td th:text="*{item.product_quantity*item.product_price}"></td>  
+						<td><a th:unless="${item.order_status}==cancelled or ${item.order_status}==rejected" href="#" class="danger">cancel</a></td>
+					</tr>
+		</table>
+	</div>
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--
 	<div th:replace="@{/admin/fragments/dashboardSidebar}::dashboardSidebar"></div>
 
 	<div>
@@ -41,7 +104,7 @@
 				<td th:text="*{item.product_quantity *  item.product_price}"></td>
 			</tr>
 		</table>
-	</div>
+	</div>-->
 </body>
 
 </html>

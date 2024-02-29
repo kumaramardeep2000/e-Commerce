@@ -5,20 +5,42 @@
 	<meta charset="ISO-8859-1">
 	<title>Login Page</title>
 	<link rel="stylesheet" th:href="@{/css/style.css}">
-    <link rel="stylesheet" th:href="@{/css/form.css}">
     <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
 
 	
 </head>
 
 <body>
 	<div th:replace="@{/header}::header"></div>
+	<div class="login">
+		<div class="form-container">
+			<h2 class="form-title">Login</h2>
+			<form th:action="@{/login}" th:object="${login}" method="post">
+		 	<input type="email" name="email" placeholder="Enter your email">
+			<input type="password" name="password" placeholder="Enter your password">
+			<button type="submit">Submit</button><br>
+			<span>If Not Register <a th:href="@{/register}">SignUp Here</a></span>
+	</form>
+			
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--
 	<form th:action="@{/login}" th:object="${login}" method="post">
 		<input type="email" name="email" placeholder="Enter your email">
 		<input type="password" name="password" placeholder="Enter your password">
 		<button type="submit">Submit</button><br>
 		<a th:href="@{/register}">click here for SignUp</a>
-	</form>
+	</form>-->
 </body>
 
 </html>
