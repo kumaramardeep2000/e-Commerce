@@ -13,7 +13,8 @@
     <div th:replace="@{/header}::header"></div>
 	<div class="dashboard">
 	<div th:replace="@{/admin/fragments/dashboardSidebar}::dashboardSidebar"></div>
-	<div class="right-content"></div>
+	<div class="right-content">
+		<h2>My Orders</h2>
 	
 	<hr> 
 	<div class="content">
@@ -27,6 +28,7 @@
 				<th>OrderDate</th>
 				<th>order_status</th>
 				<th>Total Price</th>
+				<th>Action</th>
 			</tr>
 			<tr th:each="item:${orderData}">
 				<td>
@@ -52,6 +54,7 @@
 						<td><a th:unless="${item.order_status}==cancelled or ${item.order_status}==rejected" href="#" class="danger">cancel</a></td>
 					</tr>
 		</table>
+		</div>
 	</div>
 	
 	</div>

@@ -3,8 +3,39 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/header.css}" />
+<link rel="stylesheet" th:href="@{/css/order.css}" />
 </head>
 <body>
-      <p th:text="${order}"></p>
+	<div th:replace="@{/header}::header"></div>
+	<h2 class="title">Order Details</h2>
+     
+      <div class="orderImage">
+			<img alt="" th:src="${order.product_img}">
+		</div>
+		<div class="orderData">
+			<p class="orderId" th:text="'# ' + ${order.order_id}"></p>
+			<p class="orderDate" th:text="${order.order_date}"></p>
+			<p class="productName" th:text="${order.product_name}"></p>
+			<p class="productCtg" th:text="${order.product_category}"></p>
+			<p class="price" th:text="'Price: '+ ${order.product_price}"></p>
+			<p class="qty" th:text="'Quantity: '+ ${order.product_quantity}"></p>
+			<p class="qty" th:text="'Total: ' + ${order.product_price} * ${order.product_quantity}"></p>
+		</div>
+      
+      
+      
+
+      <div class="status">
+			<p th:if="${order.order_status}==pending" class="pending" th:text="${order.order_status}"></p>
+			<p th:if="${order.order_status}==accepted" class="accepted" th:text="${order.order_status}"></p>
+			<p th:if="${order.order_status}==rejected" class="rejected" th:text="${order.order_status}"></p>
+			<p th:if="${order.order_status}==cancelled" class="cancelled" th:text="${order.order_status}"></p>
+			
+			<a th:unless="${order.order_status}==cancelled or ${order.order_status}==rejected" href="#" class="btn-second">cancel</a>
+			<a th:unless="${order.order_status}==cancelled or ${order.order_status}==rejected" href="#" class="btn-second">View Bill</a>		
+		</div>
+<!--		 <p th:text="${order}"></p>-->
 </body>
 </html>

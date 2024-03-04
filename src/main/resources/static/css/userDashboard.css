@@ -46,7 +46,7 @@
 .right-content>h2{
 	color: var(--primary-color);
 }
-.userImage{
+/*.userImage{
 	position: absolute;
 	right: 20px;
 	height: 200px;
@@ -54,3 +54,6 @@
 	object-fit: cover;
 	border-radius: 5px;
 }
+
+
+*/
